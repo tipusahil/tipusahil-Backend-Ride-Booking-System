@@ -1,0 +1,5 @@
+ dependencies packages = npm i express mongoose typescript  ts-node bcryptjs jsonwebtoken cors cookie-parser zod dotenv express-session http-status-codes passport  passport-google-oauth20  passport-local 
+
+tsc --init
+
+dev  dependencies packages =  npm i -D @types/express typescript ts-node-dev eslint typescript-eslint @types/passport-local  @types/passport-google-oauth20 @types/passport @types/jsonwebtoken @types/express-session  @types/express @types/dotenv @types/cors @types/cookie-parser @types/bcryptjs
