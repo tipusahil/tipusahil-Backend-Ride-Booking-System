@@ -2,9 +2,6 @@ import { NextFunction, Request, Response } from "express"
 import { ZodObject } from "zod"
 
 
-
-// --------------start validatedRequest higher order function --------------
-
 export const ValidationRequestHandler_HigherFunc = (zodSchema: ZodObject) =>  async  (req: Request, res: Response, next: NextFunction) => {
 
 try {

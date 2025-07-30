@@ -9,7 +9,8 @@ import { handleZodError } from "../ErrorHelpers/helpers/handleZodError";
 import { handleDuplicateError } from "../ErrorHelpers/helpers/handleDuplicateError";
 import { handleCastError } from "../ErrorHelpers/helpers/handleCastError";
 import { handleValidationError } from "../ErrorHelpers/helpers/handleValidationError";
-import AppError from "../ErrorHelpers/AppError/appError";
+import AppError from "../ErrorHelpers/AppError/AppError";
+
 
 
 
