@@ -10,7 +10,7 @@ const startServer = async () => {
   try {
     await mongoose.connect(envVars.DATABASE_URL);
     // await use korte .then().catch eshob use kora jaina, karon await sei kaj ta kore fele.
-    console.log("🟢 MongoDB connected");
+    console.log(" MongoDB connected 🟢");
 
     //------server listening kora, age db te connect kora then server listen korte hbe------
     server = app.listen(envVars.PORT, () => {

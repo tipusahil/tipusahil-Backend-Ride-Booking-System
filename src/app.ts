@@ -10,7 +10,7 @@ import notFound from "./app/middlewares/notFound.middleware";
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/v1", router);
+// app.use("/api/v1", router);
 
 
 
@@ -23,7 +23,7 @@ res.status(200).json({
 
 // ----------------------------start global Error Hanlder -----------------
 
-app.use(globalErrorHandler) // path: "./src/app/middlewares/globalErrorHandler"
+// app.use(globalErrorHandler) // path: "./src/app/middlewares/globalErrorHandler"
 // ei global error hanlder ta src/app folder e (middlewares) mane folder niye sei folder e rakte hbe
 // ----------------------------end global Error Hanlder -----------------
 app.use(notFound);// ei (notFound) ta (app.use(globalErrorHandler)) etar pore app.ts file e use hbe.
