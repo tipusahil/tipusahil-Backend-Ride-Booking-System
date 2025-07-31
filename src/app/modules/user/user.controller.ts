@@ -5,15 +5,15 @@ import { IUser } from "./user.interface";
 import { userServices } from "./user.service";
 import { sendResponse } from "../../utils/sendResponse";
 
-const createUser = catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => {
+const registerUser = catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => {
 
 
     const payload = req.body;
-    const result = await userServices.createUser(payload as IUser);
+    const result = await userServices.registerUser(payload as IUser);
     sendResponse(res, {
 success: true,
-    statusCodeT:httpStatusCodes.OK,
-    message:"user created successfully",
+    statusCode:httpStatusCodes.CREATED,
+    message:"user Register successfully",
     data :result.data,
     })
     
@@ -21,5 +21,5 @@ success: true,
 
 // --------
 export const userControllers = {
-createUser,
+registerUser,
 }
