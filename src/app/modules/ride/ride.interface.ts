@@ -17,8 +17,8 @@ export interface IRide {
     _id: string,
   rider: Types.ObjectId;
   driver?: string;
-  pickupLocation: Location;
-  destinationLocation: Location;
+  pickupLocation: ILocation;
+  destinationLocation: ILocation;
   status: status ;
   fare: number;
   createdAt: Date;

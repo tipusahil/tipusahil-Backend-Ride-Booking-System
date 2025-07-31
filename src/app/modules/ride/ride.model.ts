@@ -33,6 +33,11 @@ const rideSchema = new Schema<IRide>({
       timestamp: { type: Date, default: Date.now },
     },
   ],
-});
+},
+{
+  versionKey: false,
+  timestamps: true
+}
+);
 
-export const Ride = model<IRide>("Ride", rideSchema, "Ride_collection");
+export const RideModel = model<IRide>("Ride", rideSchema, "Ride_collection");

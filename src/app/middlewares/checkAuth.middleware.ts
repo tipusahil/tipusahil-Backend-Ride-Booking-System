@@ -6,7 +6,7 @@ import AppError from "../ErrorHelpers/AppError/AppError";
 import { UserModel } from "../modules/user/user.model";
 import { tokenVerifier } from "../utils/jwt";
 
-export const CheckAuth_Role =async (req:Request,res:Response,next: NextFunction) =>{
+export const checkAuthMidddleware =async (req:Request,res:Response,next: NextFunction) =>{
 const accessTokenFromHeaders = req.headers.authorization?.replace("Bearer ", "") || req.cookies.token;
 
 if(!accessTokenFromHeaders) {
@@ -16,7 +16,7 @@ if(!accessTokenFromHeaders) {
 try {
     
 
-const VerifiedToken = tokenVerifier(accessTokenFromHeaders, envVars.JWT_ACCESS_SECRET_SIGNATURE) as JwtPayload & { id: string; role: string };
+const VerifiedToken = tokenVerifier(accessTokenFromHeaders, envVars.JWT_ACCESS_SECRET_SIGNATURE) as JwtPayload & { userId: string; role: string };
 
 req.user = VerifiedToken;
 
@@ -33,6 +33,7 @@ throw new AppError(httpStatusCodes.BAD_REQUEST , "User Does Not Exist!");
 if(isUserExist.isBlocked){
 throw new AppError(httpStatusCodes.BAD_REQUEST , "User is Blocked!");
 }
+
 
 next();
 

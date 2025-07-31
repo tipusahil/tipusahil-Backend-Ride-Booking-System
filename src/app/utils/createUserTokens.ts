@@ -4,7 +4,7 @@ import { tokenGenerator } from "./jwt";
 
 export const createUserTokens = (user : Partial<IUser>) =>{
 const jwtPayload1 = {
-    userId: user._id,
+    userId: user._id,// kuno jaiga theke ei id access korte caile (req.user.userId) ei name use korte hobe,
     email : user.email,
     role : user.role
 }

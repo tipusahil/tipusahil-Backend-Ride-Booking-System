@@ -16,6 +16,7 @@ export const checkRole_middleware = (...roles: string[]) => {
       throw new AppError(httpStatusCodes.FORBIDDEN, 'You are not permitted to access this route' );
     }
 
+
     // ✅ Step 3: Access granted
     next();
   };

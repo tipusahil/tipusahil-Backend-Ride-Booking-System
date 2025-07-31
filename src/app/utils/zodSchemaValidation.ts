@@ -17,6 +17,7 @@ export const rideRequestSchema = z.object({
     lat: z.number(),
     lng: z.number(),
   }),
+  
   destinationLocation: z.object({
     lat: z.number(),
     lng: z.number(),
