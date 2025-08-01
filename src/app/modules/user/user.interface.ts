@@ -8,7 +8,7 @@ export enum Role { // eta enum type hobe, kuno (interface/type ) hobena
 }
 
 export interface vehicleInfo {
-vehicleType : string,
+vehicleType ?: string,
 licensePlate : string,
 }
 
@@ -27,6 +27,6 @@ export interface IUser {
     role : Role,
     isBlocked : boolean,
     createdAt : Date,
-    driverInfo ?: TDriverInfo
+    driverInfo ?: TDriverInfo[]
 
 }

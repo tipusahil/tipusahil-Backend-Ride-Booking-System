@@ -7,11 +7,11 @@ interface ILocation {
 
 export interface IStatusHistory {
   status: string;
-  timestamp: Date;
+  timestamp?: Date;
 }
 
 
-export type status =  'requested' | 'accepted' | 'picked_up' | 'in_transit' | 'completed' | 'canceled';
+export type Status =  'requested' | 'accepted' | 'picked_up' | 'in_transit' | 'completed' | 'canceled';
 
 export interface IRide {
     _id: string,
@@ -19,7 +19,7 @@ export interface IRide {
   driver?: string;
   pickupLocation: ILocation;
   destinationLocation: ILocation;
-  status: status ;
+  status: Status ;
   fare: number;
   createdAt: Date;
   updatedAt: Date;

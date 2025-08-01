@@ -10,3 +10,7 @@ export const rideRouter : Router = Router();
 
 
 rideRouter.post("/request",checkAuthMidddleware,checkRole_middleware(...Object.values(Role)), ValidationRequestHandler_HigherFunc(rideRequestSchema),rideControllers.requestRide);
+
+rideRouter.patch("/cencel/:id" ,checkAuthMidddleware,checkRole_middleware(...Object.values(Role)),rideControllers.cancelRide);
+
+rideRouter.get("/me", checkAuthMidddleware,checkRole_middleware(...Object.values(Role)) ,rideControllers.getRideHistory);

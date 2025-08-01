@@ -12,7 +12,7 @@ licensePlate : {type : String, required : true, trim:true },
 
 
 const  TDriverInfoSchema = new Schema<TDriverInfo>({
-    vehicleInfo : {type : vehicleInfo , required: true, trim:true } ,
+    vehicleInfo : {type : vehicleInfo   } ,
     isApproved : {type : Boolean, default : false },
     isOnline : {type : Boolean, default : false },
     earnings : {type : Number,default : 0 }
@@ -31,7 +31,7 @@ const userSchema = new Schema<IUser>({
   role: { type: String, enum: Object.values(Role), required: true ,lowercase: true,trim:true },//interface.ts file e Role ta enum type hote hbe.nahoi ekane import korar saggestion dibena.
   isBlocked: { type: Boolean, default: false },
   createdAt: { type: Date , default : Date.now},
-  driverInfo: [TDriverInfoSchema],
+  driverInfo: {type:[TDriverInfoSchema], default: []},
 },
 {
     versionKey: false,
