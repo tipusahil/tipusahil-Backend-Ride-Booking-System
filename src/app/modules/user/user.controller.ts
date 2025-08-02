@@ -1,29 +1,13 @@
-import  httpStatusCodes, { StatusCodes }  from 'http-status-codes';
 import { NextFunction, Request, Response } from "express";
+import { StatusCodes } from 'http-status-codes';
 import catchAsyncFunc from "../../utils/catchAsyncFunc";
-import { IUser } from "./user.interface";
-import { userServices } from "./user.service";
 import { sendResponse } from "../../utils/sendResponse";
-import { UserModel } from './user.model';
-import { QueryBuilder } from '../../utils/QueryBuilder';
+import { userServices } from "./user.service";
+import { UserModel } from "./user.model";
 
 
-// -----1.registerUser 
 
-const registerUser = catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => {
-
-    const payload = req.body;
-    const result = await userServices.registerUser(res, payload as IUser);
-    sendResponse(res, {
-success: true,
-    statusCode:httpStatusCodes.CREATED,
-    message:result.message,
-    data :result.data,
-    })
-    
-});
-
-// ------2. 
+// ------1. getAllUsers
 const getAllUsers =  catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => { 
 
     const query = req.query
@@ -43,12 +27,15 @@ const users =await userServices.getAllUsers( query as Record<string, string>); /
 
 });
 
-
-
-
+// -------2. blockUser
+const blockUser =  catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => { 
+  const userIdOrAdminId = req.params.id;
+await UserModel.findByIdAndUpdate(userIdOrAdminId, { isBlocked : true});
+ res.json({ message: 'User blocked' });
+});
 
 // --------
 export const userControllers = {
-registerUser,
-getAllUsers
+getAllUsers,
+blockUser
 }

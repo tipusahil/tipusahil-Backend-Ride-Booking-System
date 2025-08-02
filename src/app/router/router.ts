@@ -8,7 +8,7 @@ import { driverRouter } from "../modules/driver/driver.routes";
 
 const modulesRoutes = [
   {
-    path: "/user",
+    path: "/users",
     route: userRouter,
   },
   {

@@ -4,7 +4,7 @@ import { UserModel } from "../user/user.model";
 import AppError from "../../ErrorHelpers/AppError/AppError";
 import { RideModel } from "../ride/ride.model";
 
-
+// -----------1. setAvailability
 const setAvailability  = catchAsyncFunc( async (req: Request, res: Response, next:NextFunction) => {
 const { isOnline} = req.body;
 
@@ -32,63 +32,7 @@ await user.save();
 });
 
 
-
-// ---2. acceptRide 
-const acceptRide  = catchAsyncFunc( async (req: Request, res: Response, next:NextFunction) => {
-
-  const ride = await RideModel.findById(req.params.id);
-  if (!ride || ride.status !== 'requested') {
-    return res.status(400).json({ message: 'Cannot accept ride' });
-  }
-  
-
-  const driver = await UserModel.findById(req.user!.userId);
-
-    const driverInfo = driver?.driverInfo?.[0];
-
-  if (!driverInfo?.isApproved || !driverInfo?.isOnline) {
-    return res.status(403).json({ message: 'Driver not authorized' });
-  }
-  ride.driver = req.user!.userId;
-  ride.status = 'accepted';
-  ride.statusHistory.push({ status: 'accepted' });
-  await ride.save();
-
-   res.json({ message: `Ride accepted` });
-})
-
-// -------3. updateRideStatus 
-const updateRideStatus  =  catchAsyncFunc( async (req: Request, res: Response, next:NextFunction) => {
-    const userId = req.user!.userId
-    const { status } = req.body;
-    const idFromBody = req.body.id;
-    const idFromParams = req.params.id;
-    const ride = await RideModel.findById( req.params.id);
-
-    if(!ride){
-       throw new AppError(400, "ride not  found");
-    }
-
-    if(ride.driver?.toString() !== userId){
-             throw new AppError(400, "invalid driver");
-    }
-
- 
-    ride.status = status;
-    ride.statusHistory.push({ status });
-    if(status === "completed"){
-        await UserModel.findByIdAndUpdate(userId, {
-            $inc: { "driverInfo.0.earnings" : ride.fare }
-        });
-    }
-
-    await ride.save();
-     res.json({ message: 'Ride status updated' });
-})
-
-// ----------4. getEarnings
-
-
+// ----------2. getEarnings
 const getEarnings =  catchAsyncFunc( async (req: Request, res: Response, next:NextFunction) => {
 const myId = req.user!.userId;
     const driver = await UserModel.findById(myId);
@@ -96,7 +40,14 @@ const myId = req.user!.userId;
 });
 
 
+// -------------3. approveDriver
 
+const approveDriver = catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => { 
+const userOrDriverId = req.params.id;
+const approveDriver = await UserModel.findByIdAndUpdate(userOrDriverId, { "driverInfo.[0].isApproved" : true } )
+
+  res.status(200).json({ message: ' Driver approved✅ ' });
+} );
 
 
 
@@ -104,9 +55,8 @@ const myId = req.user!.userId;
 // -----------
 export const driverControllers = {
     setAvailability,
-    acceptRide,
-    updateRideStatus,
-    getEarnings
+    getEarnings,
+    approveDriver
 }
 
 

@@ -1,17 +1,29 @@
-import  bcryptjs  from 'bcryptjs';
-import { StatusCodes } from "http-status-codes";
-import AppError from "../../ErrorHelpers/AppError/AppError";
-import { UserModel } from "../user/user.model";
-import { createUserTokens } from '../../utils/createUserTokens';
-import { IUser } from '../user/user.interface';
-import { JwtPayload } from 'jsonwebtoken';
-import { setAuthTokensToCookies } from '../../utils/setAuthTokensToCookies';
-import { loginSchema } from '../../utils/zodSchemaValidation';
 import { NextFunction, Request, Response } from 'express';
-import { sendResponse } from '../../utils/sendResponse';
+import { StatusCodes } from "http-status-codes";
+import { JwtPayload } from 'jsonwebtoken';
 import catchAsyncFunc from '../../utils/catchAsyncFunc';
+import { sendResponse } from '../../utils/sendResponse';
+import { IUser } from '../user/user.interface';
+import { userServices } from '../user/user.service';
 import { authServices } from './auth.service';
 
+
+// -----1.registerUser 
+const registerUser = catchAsyncFunc( async (req:Request,res:Response,next:NextFunction) => {
+
+    const payload = req.body;
+    const result = await userServices.registerUser(res, payload as IUser);
+    sendResponse(res, {
+success: true,
+    statusCode:StatusCodes.CREATED,
+    message:result.message,
+    data :result.data,
+    })
+    
+});
+
+
+// --------2. credentialLogin
 export const credentialLogin = catchAsyncFunc( async (req: Request, res: Response, next:NextFunction) => {
 const payload = req.body;
 const result = await authServices.credentialLogin(res, payload as JwtPayload);
@@ -35,5 +47,6 @@ if(result){
 );
 
 export const authControllers = {
-    credentialLogin
+    credentialLogin,
+    registerUser
 }

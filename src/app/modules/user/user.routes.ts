@@ -6,5 +6,6 @@ import { Role } from "./user.interface";
 
 export const userRouter: Router = Router();
 
-userRouter.post("/register", userControllers.registerUser);
 userRouter.get("/",checkAuthMidddleware, checkRole_middleware( Role.admin, Role.super_admin), userControllers.getAllUsers);
+
+userRouter.patch("/block/:id",checkAuthMidddleware, checkRole_middleware( Role.admin, Role.super_admin),userControllers.blockUser);
