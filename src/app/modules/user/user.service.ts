@@ -17,6 +17,7 @@ import AppError from '../../ErrorHelpers/AppError/AppError';
 
 
 
+
 const registerUser =async (res:Response, payload : IUser) =>{
 
 const {email, password,role, driverInfo  } = payload;

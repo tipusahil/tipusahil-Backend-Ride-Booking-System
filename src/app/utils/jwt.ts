@@ -1,6 +1,7 @@
-import jwt,{ JwtPayload, SignOptions } from "jsonwebtoken";
+import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
 
 import { envVars } from "../config/env";
+import AppError from "../ErrorHelpers/AppError/AppError";
 
 
 
