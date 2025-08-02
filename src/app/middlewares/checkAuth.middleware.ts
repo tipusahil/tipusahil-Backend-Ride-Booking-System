@@ -2,9 +2,10 @@ import  httpStatusCodes from 'http-status-codes';
 import { NextFunction, Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import { envVars } from "../config/env";
-import AppError from "../ErrorHelpers/AppError/AppError";
+
 import { UserModel } from "../modules/user/user.model";
 import { tokenVerifier } from "../utils/jwt";
+import AppError from '../ErrorHelpers/AppError/AppError';
 
 export const checkAuthMidddleware =async (req:Request,res:Response,next: NextFunction) =>{
 const accessTokenFromHeaders = req.headers.authorization?.replace("Bearer ", "") || req.cookies.token;

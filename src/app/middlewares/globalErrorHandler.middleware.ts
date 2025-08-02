@@ -14,6 +14,7 @@ import AppError from "../ErrorHelpers/AppError/AppError";
 
 
 
+
 export const globalErrorHandler = async ( err: any, req: Request, res: Response, next: NextFunction ) => {
   // ------------------------
 if(envVars.NODE_ENV === "development") {

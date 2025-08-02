@@ -1,6 +1,10 @@
 import jwt,{ JwtPayload, SignOptions } from "jsonwebtoken";
-import AppError from "../ErrorHelpers/AppError/AppError";
+
 import { envVars } from "../config/env";
+
+
+
+
 
 export const tokenGenerator = ( payload : JwtPayload, secretSignature:string, expiresIn:string)=>{
     const token = jwt.sign(payload, secretSignature, { expiresIn } as SignOptions);

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TErrorSourcesArray, TGenericErrorHandlerResponse } from "../interfaces/error.types";
+
+import { TErrorSourcesArray, TGenericErrorHandlerResponse } from "../../types/customTypes";
+
 
 
 

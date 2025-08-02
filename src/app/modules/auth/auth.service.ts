@@ -3,10 +3,11 @@ import { JwtPayload } from "jsonwebtoken";
 import { loginSchema } from "../../utils/zodSchemaValidation";
 import { UserModel } from "../user/user.model";
 import { StatusCodes } from "http-status-codes";
-import AppError from "../../ErrorHelpers/AppError/AppError";
+
 import { createUserTokens } from '../../utils/createUserTokens';
 import { setAuthTokensToCookies } from '../../utils/setAuthTokensToCookies';
 import { Response } from 'express';
+import AppError from '../../ErrorHelpers/AppError/AppError';
 
 
 const credentialLogin = async (res:Response, payload : Partial<JwtPayload> ) =>{

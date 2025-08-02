@@ -45,34 +45,47 @@ Password Security: bcrypt
 Environment Management: dotenv
 Testing: Postman for API testing
 Deployment: Configured for Render.com
+Validation: Zod for schema validation
+Utilities: Custom response handling, query builder, async handler
 
 Project Structure
 src/
 ├── config/
-│   └── env.ts               # environment Variable  configuration
+│   └── env.ts                   # Environment variable configuration
 ├── middleware/
-│   ├── checkAuth.middleware.ts   # Authentication and role-based authorization
+│   ├── checkAuth.middleware.ts  # Authentication middleware
+│   ├── checkRole.middleware.ts  # Role-based authorization middleware
 │   └── globalErrorHandler.middleware.ts  # Error handling middleware
-│   └── checkRole.middleware.ts  # Check Roles middleware
 ├── modules/
-│   ├── auth/               # Authentication routes and logic
-│   ├── user/               # User management (rider, driver, admin)
-│   ├── driver/             # Driver-specific routes and logic
-│   ├── ride/               # Ride management routes and logic
+│   ├── auth/
+│   │   ├── authController.ts    # Authentication logic
+│   │   ├── authRoute.ts         # Authentication routes
+│   │   └── authModel.ts         # Authentication model
+│   ├── user/
+│   │   ├── userController.ts    # User management logic
+│   │   ├── userModel.ts         # User schema
+│   │   └── userRoute.ts         # User routes
+│   ├── driver/
+│   │   ├── driverController.ts  # Driver-specific logic
+│   │   ├── driverModel.ts       # Driver schema
+│   │   └── driverRoute.ts       # Driver routes
+│   ├── ride/
+│   │   ├── rideController.ts    # Ride management logic
+│   │   ├── rideModel.ts         # Ride schema
+│   │   └── rideRoute.ts         # Ride routes
 ├── types/
-│   └── interfaces            # TypeScript type definitions
-│   └── customTypes.ts        # TypeScript type definitions
+│   ├── interfaces/              # TypeScript interface definitions
+│   └── customTypes.ts           # Custom TypeScript types
 ├── utils/
-│   └── zodSchemaValidation.ts     #
-│   └── setAuthTokensToCookies.ts  # Utility for async error handling
-│   └── sendResponse.ts     #Utility for custom response 
-│   └── QueryBuilder.ts     #Utility for search Query
-│   └── asyncHandler.ts     #Utility for async error handling
-│   └── jwt.ts              # Utility for json web tokens create and verify
-├── app.ts                  # Main application entry point
-├── .env                    #  environment variables
-├── package.json            # Project dependencies and scripts
-├── tsconfig.json           # TypeScript configuration
+│   ├── asyncHandler.ts          # Async error handling utility
+│   ├── jwt.ts                   # JWT creation and verification
+│   ├── QueryBuilder.ts          # Search query builder
+│   ├── sendResponse.ts          # Custom response utility
+│   └── zodSchemaValidation.ts   # Zod schema validation
+├── app.ts                       # Main application entry point
+├── .env.dev                     # Environment variables template
+├── package.json                 # Project dependencies and scripts
+├── tsconfig.json                # TypeScript configuration
 
 Installation
 
@@ -89,20 +102,21 @@ Copy the .env.dev file to .env:cp .env.dev .env
 
 Update .env with your MongoDB URI and JWT secret:MONGO_URI=mongodb://localhost:27017/ride_booking
 JWT_SECRET=your_jwt_secret_key
-PORT=3000
+JWT_REFRESH_SECRET=your_jwt_refresh_secret_key
+PORT=5000
 
 
 
 
-Run the Application:npm start
+Run the Application:npm run dev
 
-The API will be available at http://localhost:5000.
+The API will be available at http://localhost:5000/api/v1
 
 Usage
 Running Locally
 
 Ensure MongoDB is running locally or provide a cloud MongoDB URI.
-Start the server:npm run dev
+Start the server in development mode:npm run dev
 
 
 Access the API at http://localhost:5000/api/v1
@@ -110,49 +124,55 @@ Access the API at http://localhost:5000/api/v1
 API Endpoints
 Authentication
 
-POST /auth/register - Register a new user (rider or driver).
-POST /auth/login - Login and receive a JWT token.
+POST  /auth/register - Register a new user (rider or driver).
+POST  /auth/login - Login and receive JWT tokens (access and refresh).
 
 Rider Endpoints
 
-POST /rides/request - Request a new ride with pickup and destination coordinates.
-PATCH /rides/:id/cancel - Cancel a ride (before driver acceptance).
-GET /rides/me - View rider's ride history.
+POST  /rides/request - Request a new ride with pickup and destination coordinates.
+PATCH  /rides/:id/cancel - Cancel a ride (before driver acceptance).
+GET  /rides/me - View rider's ride history.
 
 Driver Endpoints
 
-PATCH /rides/:id/accept - Accept a ride request.
-PATCH /rides/:id/status - Update ride status (e.g., Picked Up, Completed).
-GET /drivers/earnings - View earnings history.
-PATCH /drivers/availability - Toggle online/offline status.
+PATCH  /rides/:id/accept - Accept a ride request.
+PATCH  /rides/:id/status - Update ride status (e.g., Picked Up, Completed).
+GET  /drivers/earnings - View earnings history.
+PATCH  /drivers/availability - Toggle online/offline status.
 
 Admin Endpoints
 
-GET /users - View all users.
-PATCH /drivers/approve/:id - Approve a driver.
-PATCH /users/block/:id - Block/unblock a user.
-GET /rides - View all ride records.
+GET  /users - View all users.
+PATCH  /drivers/approve/:id - Approve a driver.
+PATCH  /users/block/:id - Block/unblock a user.
+GET  /rides - View all ride records.
 
 Testing
 
 Use Postman to test endpoints. Manually test or import a Postman collection (if provided).
-Include the JWT token in the Authorization header for protected routes:Authorization: <jwt_refresh_secret_signature>
+Include the JWT access token in the Authorization header for protected routes:Authorization: Bearer <jwt_access_token>
 
 
+Refresh tokens can be used to obtain new access tokens if expired.
 
 Contribution
 
 Fork the repository.
-Create a new branch:git checkout -b feature/my-feature-name
+Create a new branch:git checkout -b feature/your-feature-name
 
 
-Commit your changes:git commit -m "Add my feature description"
+Commit your changes:git commit -m "Add your feature description"
 
 
-Push to the branch:git push origin feature/my-feature-name
+Push to the branch:git push origin feature/your-feature-name
 
 
 Create a Pull Request on GitHub.
 
+License
+This project is licensed under the MIT License.
+Credits
+
 Developed by Tipu Sahil.
 Built for the Programming Hero Next Level Web Development course.
+Guidance from Grok, created by xAI.

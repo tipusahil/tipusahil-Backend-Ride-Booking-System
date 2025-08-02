@@ -1,14 +1,20 @@
-import  httpStatusCodes  from 'http-status-codes';
-import AppError from "../../ErrorHelpers/AppError/AppError";
-import { IUser, Role } from "./user.interface"
-import { UserModel } from "./user.model"
-import bcryptjs from "bcryptjs"
+import httpStatusCodes from 'http-status-codes';
+
+import bcryptjs from "bcryptjs";
+import { Response } from 'express';
 import { envVars } from '../../config/env';
 import { createUserTokens } from '../../utils/createUserTokens';
-import { setAuthTokensToCookies } from '../../utils/setAuthTokensToCookies';
-import { NextFunction, Response } from 'express';
 import { QueryBuilder } from '../../utils/QueryBuilder';
 import { searchAbleFieldsConstant } from '../../utils/searchAbleFieldsConstant';
+import { setAuthTokensToCookies } from '../../utils/setAuthTokensToCookies';
+import { IUser, Role } from "./user.interface";
+import { UserModel } from "./user.model";
+import AppError from '../../ErrorHelpers/AppError/AppError';
+
+
+
+
+
 
 
 const registerUser =async (res:Response, payload : IUser) =>{
