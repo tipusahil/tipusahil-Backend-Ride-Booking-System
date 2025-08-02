@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rideRouter = void 0;
+const express_1 = require("express");
+const checkAuth_middleware_1 = require("../../middlewares/checkAuth.middleware");
+const checkRole_middleware_1 = require("../../middlewares/checkRole.middleware");
+const zodValidate_higherFunc_middleware_1 = require("../../middlewares/zodValidate_higherFunc.middleware");
+const user_interface_1 = require("../user/user.interface");
+const ride_controller_1 = require("./ride.controller");
+const ride_zodSchema_1 = require("./ride.zodSchema");
+exports.rideRouter = (0, express_1.Router)();
+exports.rideRouter.post("/request", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.rider), (0, zodValidate_higherFunc_middleware_1.ValidationRequestHandler_HigherFunc)(ride_zodSchema_1.rideRequestSchema), ride_controller_1.rideControllers.requestRide);
+exports.rideRouter.patch("/accept/:id", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.driver), ride_controller_1.rideControllers.acceptRide);
+exports.rideRouter.patch("/status/:id", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.driver), ride_controller_1.rideControllers.updateRideStatus);
+exports.rideRouter.patch("/cencel/:id", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.rider), ride_controller_1.rideControllers.cancelRide);
+exports.rideRouter.get("/me", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.rider), ride_controller_1.rideControllers.getRideHistory);
+exports.rideRouter.get("/", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.admin, user_interface_1.Role.super_admin), ride_controller_1.rideControllers.getAllRides);

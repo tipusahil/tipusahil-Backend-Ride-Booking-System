@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRouter = void 0;
+const express_1 = require("express");
+const zodValidate_higherFunc_middleware_1 = require("../../middlewares/zodValidate_higherFunc.middleware");
+const zodSchemaValidation_1 = require("../../utils/zodSchemaValidation");
+const auth_controller_1 = require("./auth.controller");
+const user_zodSchema_1 = require("../user/user.zodSchema");
+exports.authRouter = (0, express_1.Router)();
+exports.authRouter.post("/register", (0, zodValidate_higherFunc_middleware_1.ValidationRequestHandler_HigherFunc)(user_zodSchema_1.registerSchema), auth_controller_1.authControllers.registerUser);
+exports.authRouter.post("/login", (0, zodValidate_higherFunc_middleware_1.ValidationRequestHandler_HigherFunc)(zodSchemaValidation_1.loginSchema), auth_controller_1.authControllers.credentialLogin);

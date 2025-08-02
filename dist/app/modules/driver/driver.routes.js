@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.driverRouter = void 0;
+const express_1 = require("express");
+const checkAuth_middleware_1 = require("../../middlewares/checkAuth.middleware");
+const checkRole_middleware_1 = require("../../middlewares/checkRole.middleware");
+const user_interface_1 = require("../user/user.interface");
+const driver_controller_1 = require("./driver.controller");
+exports.driverRouter = (0, express_1.Router)();
+exports.driverRouter.patch("/availability", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.driver), driver_controller_1.driverControllers.setAvailability);
+exports.driverRouter.get("/earnings", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.driver), driver_controller_1.driverControllers.getEarnings);
+exports.driverRouter.patch("/approve/:id", checkAuth_middleware_1.checkAuthMidddleware, (0, checkRole_middleware_1.checkRole_middleware)(user_interface_1.Role.admin, user_interface_1.Role.super_admin), driver_controller_1.driverControllers.approveDriver);
