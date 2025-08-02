@@ -101,16 +101,16 @@ Copy the .env.dev file to .env:cp .env.dev .env
 
 
 Update .env with your MongoDB URI and JWT secret:MONGO_URI=mongodb://localhost:27017/ride_booking
-JWT_SECRET=your_jwt_secret_key
-JWT_REFRESH_SECRET=your_jwt_refresh_secret_key
-PORT=5000
+JWT_SECRET=access_secret_token_dont_share_production_its_sensitive
+JWT_REFRESH_SECRET=JWT_REFRESH_SECRET
 
 
+Live Link: https://backend-ride-booking-system.vercel.app
 
 
 Run the Application:npm run dev
 
-The API will be available at http://localhost:5000/api/v1
+The API will be available at https://backend-ride-booking-system.vercel.app
 
 Usage
 Running Locally
@@ -119,7 +119,7 @@ Ensure MongoDB is running locally or provide a cloud MongoDB URI.
 Start the server in development mode:npm run dev
 
 
-Access the API at http://localhost:5000/api/v1
+Access the API at https://backend-ride-booking-system.vercel.app
 
 API Endpoints
 Authentication
