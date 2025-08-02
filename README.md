@@ -175,4 +175,4 @@ Credits
 
 Developed by Tipu Sahil.
 Built for the Programming Hero Next Level Web Development course.
-Guidance from Grok, created by xAI.
+
