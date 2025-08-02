@@ -1,0 +1,659 @@
+{
+	"info": {
+		"_postman_id": "4814786f-b451-4b0b-a5e4-85f2b795a130",
+		"name": "Ride-Booking-System-APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45515806",
+		"_collection_link": "https://tipusahil.postman.co/workspace/tipusahil's-Workspace~6c94c1cf-7365-45e4-895d-78d01c42ba3d/collection/45515806-4814786f-b451-4b0b-a5e4-85f2b795a130?action=share&source=collection_link&creator=45515806"
+	},
+	"item": [
+		{
+			"name": "driver APIs",
+			"item": [
+				{
+					"name": "driver register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"sahil\",\n  \"email\": \"sahil2@example.com\",\n  \"password\": \"abcdef\", \n  \"role\": \"driver\",\n  \"isBlocked\": false,\n  \"driverInfo\": [\n    {\n      \"vehicleInfo\": {\n        \"vehicleType\": \"Car\",\n        \"licensePlate\": \"ABC-1234\"\n      },\n      \"isApproved\": true,\n      \"isOnline\": true,\n      \"earnings\": 1250.75\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "driver set availibility",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjNjVkY2Y0MWQxZDMxN2YxNjdkZjIiLCJlbWFpbCI6ImpvaG5kb2UyQGV4YW1wbGUuY29tIiwicm9sZSI6ImRyaXZlciIsImlhdCI6MTc1NDAzMTU4MCwiZXhwIjoxNzU0MTE3OTgwfQ.oGsa_-cdfFprz7kOKJNVE8GP_M3C1yOJjeCcghTCbpI"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"isOnline\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/availability",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get driver earnings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjOTg2YjZmYjg0NzcxNGI4MmRkMjUiLCJlbWFpbCI6InNhaGlsMkBleGFtcGxlLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNDQ1MjMsImV4cCI6MTc1NDEzMDkyM30.qmyu7ZqiPUYyQgHIOv-Y8j8Y5uaW47oVwov3HshkIiA"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/earnings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"earnings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve the driver ride by admin or super_admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjY2E2NmY3NmUxYTg2YmQ3N2I3YjciLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzMxOCwiZXhwIjoxNzU0MTQzNzE4fQ.WzyeVHljjdt1M8LXrlD3P-9HTV_YnCjQBDoagm90lvE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"isApprove\":true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/approve/688cc5baf76e1a86bd77b76c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"approve",
+								"688cc5baf76e1a86bd77b76c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ride APIs",
+			"item": [
+				{
+					"name": "request ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiODdjNTNjZDIwNjg4NGI1ZTA1MzIiLCJlbWFpbCI6InRpcHVAZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzUzOTc5NTgyLCJleHAiOjE3NTQwNjU5ODJ9.9zNhJ6Ck1_7r8oFxCsHek_nX5y48l_izAWWPQE7_de8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pickupLocation\": {\n    \"lat\": 22.36733,\n    \"lng\": 91.8121\n  },\n  \"destinationLocation\": {\n    \"lat\": 22.3599,\n    \"lng\": 91.8251\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ride status update by driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjOTg2YjZmYjg0NzcxNGI4MmRkMjUiLCJlbWFpbCI6InNhaGlsMkBleGFtcGxlLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNDQ1MjMsImV4cCI6MTc1NDEzMDkyM30.qmyu7ZqiPUYyQgHIOv-Y8j8Y5uaW47oVwov3HshkIiA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \n  \"status\" : \"completed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/status/688c9f5bf195e96c8166af59",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"status",
+								"688c9f5bf195e96c8166af59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ride accept by driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjOTg2YjZmYjg0NzcxNGI4MmRkMjUiLCJlbWFpbCI6InNhaGlsMkBleGFtcGxlLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNDQ1MjMsImV4cCI6MTc1NDEzMDkyM30.qmyu7ZqiPUYyQgHIOv-Y8j8Y5uaW47oVwov3HshkIiA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \n  \"status\" : \"completed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/accept/688ccefdf76e1a86bd77b7ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"accept",
+								"688ccefdf76e1a86bd77b7ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cencel ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiODdjNTNjZDIwNjg4NGI1ZTA1MzIiLCJlbWFpbCI6InRpcHVAZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzU0MDI0ODY2LCJleHAiOjE3NTQxMTEyNjZ9.qlkZux5kgsAok8U-O8A8VMW32KEe6tFjHBMccKdJZac"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pickupLocation\": {\n    \"lat\": 22.3670,\n    \"lng\": 91.8123\n  },\n  \"destinationLocation\": {\n    \"lat\": 22.3598,\n    \"lng\": 91.8250\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/cencel/688bbb3a7bbb95c4cc0e71f1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"cencel",
+								"688bbb3a7bbb95c4cc0e71f1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rides history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiODdjNTNjZDIwNjg4NGI1ZTA1MzIiLCJlbWFpbCI6InRpcHVAZ21haWwuY29tIiwicm9sZSI6InJpZGVyIiwiaWF0IjoxNzUzOTc5NTgyLCJleHAiOjE3NTQwNjU5ODJ9.9zNhJ6Ck1_7r8oFxCsHek_nX5y48l_izAWWPQE7_de8"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ride status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjYzViYWY3NmUxYTg2YmQ3N2I3NmMiLCJlbWFpbCI6ImRyaXZlcnNhaGlsMkBleGFtcGxlLmNvbSIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNTYxMjIsImV4cCI6MTc1NDE0MjUyMn0.LklKB52_nPH71h5bYnQ6kyOaQ_HcjcfiS7UQgiSKxg0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pickupLocation\": {\n    \"lat\": 22.3670,\n    \"lng\": 91.8123\n  },\n  \"destinationLocation\": {\n    \"lat\": 22.3598,\n    \"lng\": 91.8250\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/status/688b997515d00fa322c75a6f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"status",
+								"688b997515d00fa322c75a6f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth user",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"admin sahil\",\n  \"email\": \"admin2@example.com\",\n  \"password\": \"abcdef\", \n  \"role\": \"admin\",\n  \"isBlocked\": false\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"driversahil2@example.com\",\n  \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin or super_admin",
+			"item": [
+				{
+					"name": "get all users by admin or super admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjY2E2NmY3NmUxYTg2YmQ3N2I3YjciLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzMxOCwiZXhwIjoxNzU0MTQzNzE4fQ.WzyeVHljjdt1M8LXrlD3P-9HTV_YnCjQBDoagm90lvE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all Rides by admins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjY2E2NmY3NmUxYTg2YmQ3N2I3YjciLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzMxOCwiZXhwIjoxNzU0MTQzNzE4fQ.WzyeVHljjdt1M8LXrlD3P-9HTV_YnCjQBDoagm90lvE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user block by admins",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhjZDdkYTFkZDI3Njg3MzAxYzMwOTgiLCJlbWFpbCI6InN1cGVyX2FkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlcl9hZG1pbiIsImlhdCI6MTc1NDA2MDc2MiwiZXhwIjoxNzU0MTQ3MTYyfQ.F7Jk6ce-xyhB4gQqA7RRzjMW3mrQXEZ0N9Rl7SYAB1k"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"tipu@gmail.com\",\n  \"password\": \"securepassword123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/block/688b87c53cd206884b5e0532",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"block",
+								"688b87c53cd206884b5e0532"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User APIs",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"super_admin\",\n  \"email\": \"super_admin@gmail.com\",\n  \"password\": \"securepassword123\",\n  \"role\": \"super_admin\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user logins",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"tipu@gmail.com\",\n  \"password\": \"securepassword123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/user/block/:",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"block",
+								":"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth for admins",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"admin sahil\",\n  \"email\": \"admin2@example.com\",\n  \"password\": \"abcdef\", \n  \"role\": \"admin\",\n  \"isBlocked\": false\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"driversahil2@example.com\",\n  \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
