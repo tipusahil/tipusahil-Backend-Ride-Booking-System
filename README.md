@@ -155,23 +155,7 @@ Include the JWT access token in the Authorization header for protected routes:Au
 
 Refresh tokens can be used to obtain new access tokens if expired.
 
-Contribution
 
-Fork the repository.
-Create a new branch:git checkout -b feature/your-feature-name
-
-
-Commit your changes:git commit -m "Add your feature description"
-
-
-Push to the branch:git push origin feature/your-feature-name
-
-
-Create a Pull Request on GitHub.
-
-License
-This project is licensed under the MIT License.
-Credits
 
 Developed by Tipu Sahil.
 Built for the Programming Hero Next Level Web Development course.
