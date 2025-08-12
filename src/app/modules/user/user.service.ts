@@ -47,9 +47,12 @@ const result = await UserModel.create(payload);
 const tokens = createUserTokens(result);
 setAuthTokensToCookies(res,tokens);
 
+
 return {
     data : result,
-    message :`User Register Successfully as a ${role}`
+    message :`User Register Successfully as a ${role}`,
+    accessToken : tokens.accessToken,
+    refreshToken : tokens.refreshToken,
 }
 }
 

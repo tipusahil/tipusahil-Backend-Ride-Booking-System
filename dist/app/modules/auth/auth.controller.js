@@ -26,7 +26,11 @@ const registerUser = (0, catchAsyncFunc_1.default)((req, res, next) => __awaiter
         success: true,
         statusCode: http_status_codes_1.StatusCodes.CREATED,
         message: result.message,
-        data: result.data,
+        data: {
+            accesstoken: result.accessToken,
+            refreshtoken: result.refreshToken,
+            user: result.data,
+        }
     });
 }));
 // --------2. credentialLogin

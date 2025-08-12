@@ -44,7 +44,9 @@ const registerUser = (res, payload) => __awaiter(void 0, void 0, void 0, functio
     (0, setAuthTokensToCookies_1.setAuthTokensToCookies)(res, tokens);
     return {
         data: result,
-        message: `User Register Successfully as a ${role}`
+        message: `User Register Successfully as a ${role}`,
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
     };
 });
 // ------2. 

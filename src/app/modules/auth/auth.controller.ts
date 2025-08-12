@@ -13,11 +13,17 @@ const registerUser = catchAsyncFunc( async (req:Request,res:Response,next:NextFu
 
     const payload = req.body;
     const result = await userServices.registerUser(res, payload as IUser);
+   
     sendResponse(res, {
 success: true,
     statusCode:StatusCodes.CREATED,
     message:result.message,
-    data :result.data,
+    data : {
+      accesstoken :result.accessToken,
+      refreshtoken :result.refreshToken,
+      user : result.data,
+
+    }
     })
     
 });
