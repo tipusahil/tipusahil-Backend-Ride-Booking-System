@@ -9,7 +9,17 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/server.js"
+      "dest": "dist/server.js"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/auth/(.*)",
+      "destination": "/api/v1/auth/$1"
+    },
+    {
+      "source": "/user/(.*)",
+      "destination": "/api/v1/user/$1"
     }
   ]
 }
