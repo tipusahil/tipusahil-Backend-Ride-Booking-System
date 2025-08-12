@@ -130,13 +130,13 @@ POST  /auth/login - Login and receive JWT tokens (access and refresh).
 Rider Endpoints
 
 POST  /rides/request - Request a new ride with pickup and destination coordinates.
-PATCH  /rides/:id/cancel - Cancel a ride (before driver acceptance).
+PATCH  /rides/cancel/:id - Cancel a ride (before driver acceptance).
 GET  /rides/me - View rider's ride history.
 
 Driver Endpoints
 
-PATCH  /rides/:id/accept - Accept a ride request.
-PATCH  /rides/:id/status - Update ride status (e.g., Picked Up, Completed).
+PATCH  /rides/accept/:id - Accept a ride request.
+PATCH  /rides/status/:id - Update ride status (e.g., Picked Up, Completed).
 GET  /drivers/earnings - View earnings history.
 PATCH  /drivers/availability - Toggle online/offline status.
 
