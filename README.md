@@ -110,7 +110,7 @@ Live Link: https://backend-ride-booking-system.vercel.app
 
 Run the Application:npm run dev
 
-The API will be available at https://backend-ride-booking-system.vercel.app
+The API will be available at https://backend-ride-booking-system.vercel.app/api/v1
 
 Usage
 Running Locally
@@ -119,7 +119,7 @@ Ensure MongoDB is running locally or provide a cloud MongoDB URI.
 Start the server in development mode:npm run dev
 
 
-Access the API at https://backend-ride-booking-system.vercel.app
+Access the API at https://backend-ride-booking-system.vercel.app/api/v1
 
 API Endpoints
 Authentication
