@@ -6,7 +6,7 @@ vehicleType : {type : String, required : true , trim:true },
 licensePlate : {type : String, required : true, trim:true },
 },
 {
-    versionKey: false,
+    // versionKey: false,
     timestamps: true
 });
 
@@ -18,7 +18,7 @@ const  TDriverInfoSchema = new Schema<TDriverInfo>({
     earnings : {type : Number,default : 0 }
 },
 {
-    versionKey: false,
+    // versionKey: false,
     timestamps: true
 });
 
@@ -34,7 +34,7 @@ const userSchema = new Schema<IUser>({
   driverInfo: {type:[TDriverInfoSchema], default: []},
 },
 {
-    versionKey: false,
+    // versionKey: false,
     timestamps: true
 }
 );

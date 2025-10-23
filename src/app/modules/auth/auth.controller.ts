@@ -19,8 +19,8 @@ success: true,
     statusCode:StatusCodes.CREATED,
     message:result.message,
     data : {
-      accesstoken :result.accessToken,
-      refreshtoken :result.refreshToken,
+      accessToken :result.accessToken,
+      refreshToken :result.refreshToken,
       user : result.data,
 
     }
