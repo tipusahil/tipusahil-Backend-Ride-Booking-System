@@ -7,5 +7,8 @@ import { Role } from "./user.interface";
 export const userRouter: Router = Router();
 
 userRouter.get("/",checkAuthMidddleware, checkRole_middleware( Role.admin, Role.super_admin), userControllers.getAllUsers);
+userRouter.get("/me",checkAuthMidddleware, checkRole_middleware(...Object.keys(Role)),userControllers.getMe);
 
 userRouter.patch("/block/:id",checkAuthMidddleware, checkRole_middleware( Role.admin, Role.super_admin),userControllers.blockUser);
+
+userRouter.put("/",checkAuthMidddleware, checkRole_middleware(...Object.keys(Role)),userControllers.updateUser);

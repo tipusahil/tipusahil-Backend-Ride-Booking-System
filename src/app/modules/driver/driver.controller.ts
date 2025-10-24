@@ -46,7 +46,7 @@ const approveDriver = catchAsyncFunc( async (req:Request,res:Response,next:NextF
 const userOrDriverId = req.params.id;
 const approveDriver = await UserModel.findByIdAndUpdate(userOrDriverId, { "driverInfo.[0].isApproved" : true } )
 
-  res.status(200).json({ message: ' Driver approved✅ ' });
+  res.status(200).json({status: 200, success:true, message: ' Driver approved✅ ' });
 } );
 
 

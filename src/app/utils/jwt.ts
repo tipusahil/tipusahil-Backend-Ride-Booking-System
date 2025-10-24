@@ -13,11 +13,12 @@ export const tokenGenerator = ( payload : JwtPayload, secretSignature:string, ex
 };
 
 
-export const tokenVerifier = (accessTokenFromHeaders : string, secretSignature : string) : JwtPayload  =>{
+export const tokenVerifier = (accessTokenFromHeadersOrCookies : string, secretSignature : string) : JwtPayload  =>{
 try {
-    // accessTokenFromHeaders = req.headers.authorization; request er headers theke token ta access korte hobe, 
-const verifiedDecodedToken = jwt.verify(accessTokenFromHeaders,secretSignature) as JwtPayload;
-
+    // accessTokenFromHeadersOrCookies = req.headers.authorization; request er headers theke token ta access korte hobe, 
+    console.log("jwt.ts file theke----:1:",accessTokenFromHeadersOrCookies)
+const verifiedDecodedToken = jwt.verify(accessTokenFromHeadersOrCookies,secretSignature) as JwtPayload;
+    console.log("jwt.ts file theke----:2:",accessTokenFromHeadersOrCookies)
 return verifiedDecodedToken;
 } catch (error) {
 

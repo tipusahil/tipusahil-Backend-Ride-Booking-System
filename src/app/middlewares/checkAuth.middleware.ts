@@ -8,16 +8,17 @@ import { tokenVerifier } from "../utils/jwt";
 import AppError from '../ErrorHelpers/AppError/AppError';
 
 export const checkAuthMidddleware =async (req:Request,res:Response,next: NextFunction) =>{
-const accessTokenFromHeaders = req.headers.authorization?.replace("Bearer ", "") || req.cookies.token;
+const accessTokenFromHeadersOrCookies =await req.cookies.accessToken;
+console.log(accessTokenFromHeadersOrCookies);
 
-if(!accessTokenFromHeaders) {
-    throw new AppError(401,"No Token Provided to Headers.");
+if(!accessTokenFromHeadersOrCookies) {
+    throw new AppError(401,"No accessToken Provided to cookies or headers");
 }
 
 try {
     
 
-const VerifiedToken = tokenVerifier(accessTokenFromHeaders, envVars.JWT_ACCESS_SECRET_SIGNATURE) as JwtPayload & { userId: string; role: string };
+const VerifiedToken = tokenVerifier(accessTokenFromHeadersOrCookies, envVars.JWT_ACCESS_SECRET_SIGNATURE) as JwtPayload & { userId: string; role: string,email:string };
 
 req.user = VerifiedToken;
 

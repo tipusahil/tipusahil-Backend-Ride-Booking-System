@@ -1,7 +1,7 @@
 import httpStatusCodes from 'http-status-codes';
 
 import bcryptjs from "bcryptjs";
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { envVars } from '../../config/env';
 import { createUserTokens } from '../../utils/createUserTokens';
 import { QueryBuilder } from '../../utils/QueryBuilder';
@@ -19,8 +19,9 @@ import AppError from '../../ErrorHelpers/AppError/AppError';
 
 
 const registerUser =async (res:Response, payload : IUser) =>{
-
+console.log({payload})
 const {email, password,role, driverInfo  } = payload;
+console.log({driverInfo})
 
     const isUserExist = await UserModel.findOne({ email });
 
@@ -34,10 +35,9 @@ if(isUserExist){
 
 
   // যদি driver হয় তাহলে driverInfo থাকা লাগবে
-if(role ===  Role.driver && !driverInfo){
-    throw new AppError(400,"please enter your driverInfo data, and then you register as a driver");
+if (role === Role.driver && (!driverInfo || driverInfo.length === 0)) {
+  throw new AppError(400, "please enter your driverInfo data, and then you register as a driver");
 }
-
 
 const hashedPassword = await bcryptjs.hash(password as string, Number(envVars.BCRYPT_SALT_ROUND));
 payload.password = hashedPassword;
@@ -79,8 +79,30 @@ const QueryExucute = await Promise.all([  data.build(),  queryBulder1.getMeta() 
   };
 };
 
+// -----3. updateUser 
+const updateUser =async ( req: Request) =>{
+  const payload = req.body as Partial<IUser>;
 
+    const isUserExist = await UserModel.findOne({ email:payload.email });
+
+if(payload?.role ==="admin" && (req.user?.role !=="admin" || isUserExist?.role !=="admin") ){
+    throw new AppError(httpStatusCodes.FORBIDDEN,"you are not permitted to be a admin,only admin or super admin can change the admin role");
+}; 
+
+const hashedPassword = await bcryptjs.hash(payload?.password as string, Number(envVars.BCRYPT_SALT_ROUND));
+payload.password = hashedPassword;
+
+const result = await UserModel.findByIdAndUpdate({id:req.user?.id, data:payload, password: hashedPassword});
+return result;
+}
+
+
+
+
+
+// ----------
 export const userServices = {
     registerUser,
-    getAllUsers
+    getAllUsers,
+    updateUser
 }

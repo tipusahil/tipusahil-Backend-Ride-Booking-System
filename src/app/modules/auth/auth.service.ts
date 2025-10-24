@@ -36,8 +36,8 @@ const credentialLogin = async (res:Response, payload : Partial<JwtPayload> ) =>{
     setAuthTokensToCookies(res,tokens);
 
   return  {
-      accesstoken : tokens.accessToken,
-      refreshtoken : tokens.refreshToken,
+      accessToken : tokens.accessToken,
+      refreshToken : tokens.refreshToken,
       user : rest
    
     }

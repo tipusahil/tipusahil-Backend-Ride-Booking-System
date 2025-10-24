@@ -20,6 +20,6 @@ rideRouter.patch("/status/:id", checkAuthMidddleware,checkRole_middleware(Role.d
 rideRouter.patch("/cencel/:id" ,checkAuthMidddleware,checkRole_middleware(Role.rider),rideControllers.cancelRide);
 
 
-rideRouter.get("/me", checkAuthMidddleware,checkRole_middleware(Role.rider) ,rideControllers.getRideHistory);
+rideRouter.get("/ride-history", checkAuthMidddleware,checkRole_middleware(Role.rider) ,rideControllers.getRideHistory);
 
 rideRouter.get("/", checkAuthMidddleware,checkRole_middleware(Role.admin, Role.super_admin) , rideControllers.getAllRides);
